@@ -1,16 +1,16 @@
 import React, { FormEvent, useState } from 'react'
-import { PASS, USER } from '../utils/constats';
+import { PASS, USER } from '../../utils/constats';
+import { LoginUser } from './require';
 
-type Props = {}
-
-const Login = (props: Props) => {
+const Login = () => {
   const [email, setEmail] = useState<string>(USER);
   const [password, setPassword] = useState<string>(PASS);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-
+    const res = await LoginUser({email, password});
+    console.log(res);
     
   }
 
