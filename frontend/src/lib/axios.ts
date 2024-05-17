@@ -1,0 +1,28 @@
+import axios from 'axios';
+import { URL_API } from '../utils/constats';
+
+const Axios = axios.create({
+  baseURL: URL_API,
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json'
+  }
+});
+
+Axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) config.headers['Authorization'] = `JWT ${token}`;
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+Axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+export default Axios;
