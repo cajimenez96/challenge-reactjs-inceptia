@@ -1,7 +1,8 @@
-import { LoginPayload, LoginRequest, LoginResponse } from "../../api/User";
+import { LoginRequest} from "../../api/User";
+import { Login, User } from "../../api/interface";
 
 
-export const LoginUser = async (form: LoginPayload): Promise<LoginResponse> => {
+export const LoginUser = async (form: Login): Promise<User> => {
   return await LoginRequest(form)
   .then((res) => {
     localStorage.setItem('token', res.token);

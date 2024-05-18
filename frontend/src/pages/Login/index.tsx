@@ -1,18 +1,20 @@
 import React, { FormEvent, useState } from 'react'
 import { PASS, USER } from '../../utils/constats';
 import { LoginUser } from './require';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>(USER);
   const [password, setPassword] = useState<string>(PASS);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const res = await LoginUser({email, password});
-    console.log(res);
-    
-  }
+    const login = await LoginUser({email, password})
+
+    if (login) navigate("/reports")  
+  };
 
   return (
     <section className="">
