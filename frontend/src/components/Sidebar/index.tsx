@@ -30,10 +30,10 @@ const Sidebar = ({children, elements, setElement}: SidebarProps) => {
           <FaAlignLeft size={20} />
         </Button>
 
-        <aside id="default-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${!openNav && '-translate-x-full'} sm:translate-x-0`} aria-label="Sidebar">
-          <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-            <div className="mb-5 flex justify-between items-center">
-              <h3 className="">CLIENTE</h3>
+        <aside id="default-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${!openNav && '-translate-x-full'} sm:translate-x-0 bg-bg-dark text-font-light`} aria-label="Sidebar">
+          <div className="h-full px-3 py-4 overflow-y-auto">
+            <div className="mb-5 flex justify-between items-center md:mt-20 md:mb-12">
+              <h3 className="text-xl font-bold tracking-widest">CLIENTES</h3>
               <Button>
                 <FaAngleDoubleLeft size={20} />
               </Button>
@@ -42,7 +42,7 @@ const Sidebar = ({children, elements, setElement}: SidebarProps) => {
                 {elements.map((element, index) => (
                   <li key={index}>
                     <button
-                      className="w-full flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                      className="w-full flex items-center p-2 rounded-lg border-transparent transition hover:bg-hover hover:text-font-white"
                       onClick={() => setElement(element.id)}>
                       <FaRegUser />
                       <span className="ms-3">{element.name}</span>

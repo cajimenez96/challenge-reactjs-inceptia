@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
 
 interface Time {
-  startDate: string | null;
-  endDate: string | null;
+  startDate: string;
+  endDate: string;
 }
 
 interface FilterProps {

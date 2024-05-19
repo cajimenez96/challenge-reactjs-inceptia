@@ -7,8 +7,8 @@ import { Case } from '../../api/Reports';
 import Filter from '../../components/Filter';
 
 interface Time {
-  startDate: string | null;
-  endDate: string | null;
+  startDate: string;
+  endDate: string;
 }
 
 const INITIAL_STATE = {
