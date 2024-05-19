@@ -11,7 +11,8 @@ module.exports = {
       'bg-box': 'var(--bg-box)',
       'font-primary': 'var(--font-primary)',
       'font-secondary': 'var(--font-secondary)',
-      'border-primary': 'var(--border-primary)'
+      'border-primary': 'var(--border-primary)',
+      'border-secondary': 'var(--bg-secondary)'
     },
     extend: {},
   },
