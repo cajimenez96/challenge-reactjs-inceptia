@@ -9,7 +9,7 @@ interface TableProps {
 }
 
 const Table = ({elements}: TableProps) => {
-
+  
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg bg-white border border-primary">
       <table className="w-full text-sm text-left rtl:text-right">
@@ -42,7 +42,7 @@ const Table = ({elements}: TableProps) => {
               <td className="p-4 flex items-center gap-2">
                 <FaClock /> {element.case_duration}
               </td>
-              <td className="p-4">{element.status}</td>
+              <td className="p-4 font-semibold">{element.case_result.name}</td>
             </tr>
           ))}
         </tbody>
