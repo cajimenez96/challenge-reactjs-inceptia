@@ -11,13 +11,13 @@ interface TableProps {
 const Table = ({elements}: TableProps) => {
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg bg-bg-white border border-border-primary">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg bg-white border border-primary">
       <table className="w-full text-sm text-left rtl:text-right">
 
         <thead className="text-xs uppercase">
           <tr>
             {tableHeader.map((table, index) => (
-              <th scope="col" className="px-6 py-3" key={index}>
+              <th scope="col" className="p-5 uppercase bg-blue text-font-white" key={index}>
                 {table}
               </th>
             ))}
@@ -30,7 +30,7 @@ const Table = ({elements}: TableProps) => {
               <td className="p-5">No hay resultados.</td>
             </tr>
           ) : elements.map((element) => (
-            <tr key={element.case_uuid} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b border-border-primary dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr key={element.case_uuid} className="odd:bg-light even:bg-white border-b border-primary hover:bg-hover-dark">
               <td className="p-4 flex items-center gap-2">
                 <FaCalendarAlt /> {element.last_updated}
               </td>

@@ -59,8 +59,7 @@ const Report = () => {
         </article>
         <article className="mb-10 w-full">
           <div className="flex justify-end items-center gap-4">
-            <p>Filtrar</p>
-            <div className=" w-80">
+            <div className="w-80">
               <Filter date={filterDate} setDate={setFilterDate} />
             </div>
           </div>

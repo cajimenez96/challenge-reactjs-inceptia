@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Datepicker, { DateValueType } from "react-tailwindcss-datepicker";
+import React from 'react';
+import Datepicker from "react-tailwindcss-datepicker";
 
 interface Time {
   startDate: string;
@@ -24,12 +24,16 @@ const Filter = ({setDate, date}: FilterProps) => {
     } 
 
   return (
+    <>
+      <p className="mb-2">Filtro por fecha</p>
       <Datepicker
+        primaryColor={"sky"} 
         value={date}
         onChange={handleValueChange}
         displayFormat={"YYYY-MM-DD"}
         separator='hasta'
       /> 
+    </>
   )
 }
 

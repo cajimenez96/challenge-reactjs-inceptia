@@ -2,21 +2,28 @@
 module.exports = {
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
-    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
+    './node_modules/react-tailwindcss-datepicker/dist/index.esm.js',
   ],
   theme: {
     colors: {
-      'bg-light': 'var(--bg-light)',
-      'bg-blue': 'var(--bg-blue)',
-      'bg-dark': 'var(--bg-dark)',
-      'bg-white': 'var(--bg-white)',
+      'light': 'var(--bg-light)',
+      'blue': 'var(--bg-blue)',
+      'dark': 'var(--bg-dark)',
+      'white': 'var(--bg-white)',
+      'transparent': 'transparent',
+      //fonts
       'font-light': 'var(--font-light)',
       'font-dark': 'var(--font-dark)',
       'font-white': 'var(--font-white)',
-      'border-primary': 'var(--border-primary)',
-      'border-secondary': 'var(--bg-blue)',
-      'transparent': 'transparent',
-      'hover': 'var(--bg-terciary-hover)'
+      //border
+      'primary': 'var(--border-primary)',
+      'secondary': 'var(--bg-blue)',
+      //others
+      'hover': 'var(--hover-light)',
+      'hover-dark': 'var(--hover-dark)',
+      'sky-500': 'var(--bg-blue)',
+      'sky-100': 'var(--bg-light)',
+
     },
     extend: {},
   },

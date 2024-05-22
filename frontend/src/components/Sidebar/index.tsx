@@ -30,7 +30,7 @@ const Sidebar = ({children, elements, setElement}: SidebarProps) => {
           <FaAlignLeft size={20} />
         </Button>
 
-        <aside id="default-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${!openNav && '-translate-x-full'} sm:translate-x-0 bg-bg-dark text-font-light`} aria-label="Sidebar">
+        <aside id="default-sidebar" className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${!openNav && '-translate-x-full'} sm:translate-x-0 bg-dark text-font-light`} aria-label="Sidebar">
           <div className="h-full px-3 py-4 overflow-y-auto">
             <div className="mb-5 flex justify-between items-center md:mt-20 md:mb-12">
               <h3 className="text-xl font-bold tracking-widest">CLIENTES</h3>
