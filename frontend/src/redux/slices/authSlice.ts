@@ -22,7 +22,9 @@ export const LoginUser = createAsyncThunk<
   Login
 >('Auth/login', async (form, thunkAPI) => {
   try {
-    return await LoginRequest(form);
+    const response = await LoginRequest(form);
+    localStorage.setItem('token', response.token);
+    return response;
   } catch (error) {
     return thunkAPI.rejectWithValue({});
   }
