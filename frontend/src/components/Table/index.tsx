@@ -3,12 +3,15 @@ import { tableHeader } from '../../utils/constats';
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
 import { Case } from '../../api/Reports';
+import Spinner from '../Spinner';
 
 interface TableProps {
-  elements: Case[]
+  elements: Case[];
+  loading: boolean;
 }
 
-const Table = ({elements}: TableProps) => {
+const Table = ({elements, loading}: TableProps) => {
+  console.log(elements);
   
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg bg-white border border-primary">
@@ -25,7 +28,13 @@ const Table = ({elements}: TableProps) => {
         </thead>
 
         <tbody>
-          {elements.length === 0 ? (
+          {loading ? (
+            <tr>
+              <td className="p-5 text-center" colSpan={tableHeader.length}>
+                <div className="w-full flex justify-center"><Spinner /></div>
+                </td>
+              </tr>
+          ) : elements.length === 0 ? (
             <tr>
               <td className="p-5">No hay resultados.</td>
             </tr>

@@ -2,7 +2,8 @@ import React, {ReactNode, useEffect, useState} from 'react';
 import { FaRegUser } from "react-icons/fa";
 import { FaAlignLeft } from "react-icons/fa";
 import { FaAngleDoubleLeft } from "react-icons/fa";
-import { Client } from '../../api/interface';
+import { Client } from '../../api/type';
+import Spinner from '../Spinner';
 
 interface SidebarProps {
   children: ReactNode;
@@ -39,7 +40,8 @@ const Sidebar = ({children, elements, setElement}: SidebarProps) => {
               </Button>
             </div>
               <ul className="space-y-2 font-medium">
-                {elements.map((element, index) => (
+                {!elements ? <Spinner/> 
+                : elements.map((element, index) => (
                   <li key={index}>
                     <button
                       className="w-full flex items-center p-2 rounded-lg border-transparent transition hover:bg-hover hover:text-font-white"

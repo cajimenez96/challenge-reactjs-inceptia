@@ -26,11 +26,11 @@ export const LoginUser = createAsyncThunk<
     localStorage.setItem('token', response.token);
     return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue({});
+    return error;
   }
 });
 
-const userSlice = createSlice({
+const authSlice = createSlice({
 	name: "user",
 	initialState,
 	reducers: {},
@@ -49,4 +49,4 @@ const userSlice = createSlice({
 export const isAuthSelector = (state: RootState) => state.auth.isAuth;
 export const isLoadingSelector = (state: RootState) => state.auth.isLoading;
 
-export default userSlice.reducer;
+export default authSlice.reducer;

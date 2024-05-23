@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Sidebar from '../../components/Sidebar';
 import Table from '../../components/Table';
-import { getClientDetail, getClientReport } from './require';
-import { Client } from '../../api/interface';
-import { Case } from '../../api/Reports';
+import { Client } from '../../api/type';
+import { Case, GetClientsResponse } from '../../api/Reports';
 import Filter from '../../components/Filter';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { getClientReport, clientsSelector, isLoadingSelector, getClientDetailReport, clientDetailSelector } from '../../redux/slices/clientSlice';
 
 interface Time {
   startDate: string;
@@ -17,42 +18,28 @@ const INITIAL_STATE = {
 }
 
 const Report = () => {
-  const [clientDetail, setClientDetail] = useState<Case[]>([]);
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(isLoadingSelector);
+  const clients = useAppSelector(clientsSelector);
+  const details = useAppSelector(clientDetailSelector);
+
   const [clientId, setClientId] = useState<number>(0);
-  const [users, setUsers] = useState<Client[]>([]);
-  const [filterDate, setFilterDate] = useState<Time>(INITIAL_STATE); 
-
+  const [filterDate, setFilterDate] = useState<Time>(INITIAL_STATE);
+  
   useEffect(() => {
-    const getClients = async () => {
-      await getClientReport()
-      .then((res) => {
-        setUsers(res);
-      })
-      .catch((err) => {
-        console.log('todo mal' + err);
-      });
-    }
-
-    getClients();
+    dispatch(getClientReport());
   }, []);
 
   useEffect(() => {
     const getDetails = async (id: number, filter: Time) => { 
-
-      await getClientDetail(id, filter.startDate, filter.endDate)
-      .then((res) => {
-        setClientDetail(res.results)
-      })
-      .catch((err) => {
-        console.log('todo mal' + err);
-      })
+      await dispatch(getClientDetailReport({id, from: filter.startDate, to: filter.endDate}));
     }
 
     if (clientId) getDetails(clientId, filterDate);
   }, [clientId, filterDate]);
 
   return (
-    <Sidebar elements={users} setElement={setClientId}>
+    <Sidebar elements={clients} setElement={setClientId}>
       <section>
         <article className="mb-10 mt-5">
           <h3 className="uppercase">Reportes</h3>
@@ -65,7 +52,7 @@ const Report = () => {
           </div>
         </article>
         <article>
-          <Table elements={clientDetail}/>
+          <Table elements={details} loading={isLoading} />
         </article>
       </section>
     </Sidebar>

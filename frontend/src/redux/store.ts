@@ -1,13 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
-// import clientsReducer from "./slices/clientSlice";
-// import filtersReducer from "./slices/filtersSlice";
+import clientsReducer from "./slices/clientSlice";
 
 const store = configureStore({
 	reducer: {
 		auth: authReducer,
-		// clients: clientsReducer,
-		// filters: filtersReducer
+		clients: clientsReducer,
 	}
 });
 
