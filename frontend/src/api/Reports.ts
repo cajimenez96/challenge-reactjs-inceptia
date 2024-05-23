@@ -1,5 +1,5 @@
 import Axios from "../lib/axios";
-import { Bot, Client, Case_Log, Case_Result, Extra_Metadata } from "./interface";
+import { Bot, Client, Case_Log, Case_Result, Extra_Metadata } from "./type";
 
 export type GetClientsResponse = Client[];
 

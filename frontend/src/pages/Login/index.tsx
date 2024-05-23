@@ -1,13 +1,14 @@
 import React, { FormEvent, useContext, useState } from 'react'
 import { PASS, USER } from '../../utils/constats';
-import { LoginUser } from './require';
+// import { LoginUser } from './require';
 import { useNavigate } from "react-router-dom";
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import {AuthContext} from '../../context/AuthContext';
+import { LoginUser } from '../../redux/slices/Auth.slice';
+// import {AuthContext} from '../../context/AuthContext';
 
 const Login = () => {
-  const {setAuthenticated} = useContext(AuthContext);
+  // const {setAuthenticated} = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>(USER);
@@ -16,9 +17,12 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const login = await LoginUser({email, password}, setAuthenticated);
+    const login = LoginUser({email, password});
 
-    if (login) navigate('/reports')
+    console.log(login);
+    
+
+    // if (login) navigate('/reports')
 
   };
 

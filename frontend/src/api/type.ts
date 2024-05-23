@@ -58,3 +58,8 @@ export interface Extra_Metadata {
   grupo: string;
   orden: string;
 }
+
+export interface GeneralError {
+  message: string,
+  status: number,
+}

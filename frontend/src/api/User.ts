@@ -1,5 +1,5 @@
 import Axios from "../lib/axios";
-import { Login, User } from "./interface";
+import { Login, User } from "./type";
 
 type LoginPayload = Login;
 
