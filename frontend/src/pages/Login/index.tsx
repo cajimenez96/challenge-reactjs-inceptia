@@ -1,21 +1,25 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useContext, useState } from 'react'
 import { PASS, USER } from '../../utils/constats';
 import { LoginUser } from './require';
 import { useNavigate } from "react-router-dom";
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import {AuthContext} from '../../context/AuthContext';
 
 const Login = () => {
+  const {setAuthenticated} = useContext(AuthContext);
   const navigate = useNavigate();
+
   const [email, setEmail] = useState<string>(USER);
   const [password, setPassword] = useState<string>(PASS);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const login = await LoginUser({email, password})
+    const login = await LoginUser({email, password}, setAuthenticated);
 
-    if (login) navigate("/reports")  
+    if (login) navigate('/reports')
+
   };
 
   return (

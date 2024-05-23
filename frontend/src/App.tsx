@@ -1,14 +1,12 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import Login from './pages/Login';
-import Report from './pages/Report';
+import React, { useContext } from 'react';
+import AuthProvider from './context/AuthContext';
+import Routes from './routes';
 
-const App = () => {
+const App = () => {  
   return (
-    <Routes>
-      <Route path='/' element={<Login/>} />
-      <Route path='/reports' element={<Report />} />
-    </Routes>
+    <AuthProvider>
+      <Routes/>
+    </AuthProvider>
   )
 }
 
