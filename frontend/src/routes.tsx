@@ -1,14 +1,11 @@
 import React from 'react'
 import {Routes as Router, Route, Navigate, Outlet} from 'react-router-dom'
-// import { AuthContext } from './context/AuthContext'
-import Login from './pages/Login'
-import Report from './pages/Report'
-import { useAppSelector } from './redux/hooks'
+import { Login, Report } from './pages';
+import { useAppSelector } from './redux/hooks';
+import { isAuthSelector } from './redux/slices/authSlice';
 
 const PrivateRoutes = () => {
-  // const { authenticated } = useContext(AuthContext);
-  const isAuth = useAppSelector((state) => state)
-
+  const isAuth = useAppSelector(isAuthSelector)
 
   if(!isAuth) return <Navigate to='/' replace />
 

@@ -1,14 +1,17 @@
-import React, { FormEvent, useContext, useState } from 'react'
+import React, { FormEvent, useContext, useEffect, useState } from 'react'
 import { PASS, USER } from '../../utils/constats';
-// import { LoginUser } from './require';
 import { useNavigate } from "react-router-dom";
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { LoginUser } from '../../redux/slices/Auth.slice';
-// import {AuthContext} from '../../context/AuthContext';
+//Redux
+import { LoginUser, isAuthSelector, isLoadingSelector } from '../../redux/slices/authSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import Spinner from '../../components/Spinner';
 
 const Login = () => {
-  // const {setAuthenticated} = useContext(AuthContext);
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(isAuthSelector);
+  const isLoading = useAppSelector(isLoadingSelector);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState<string>(USER);
@@ -17,14 +20,13 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const login = LoginUser({email, password});
-
-    console.log(login);
-    
-
-    // if (login) navigate('/reports')
+    dispatch(LoginUser({email, password}))
 
   };
+
+  useEffect(() => {
+    if (isAuth) navigate('/reports')
+  }, [isAuth]);
 
   return (
     <>
@@ -55,8 +57,11 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <Button type="submit">
+              <Button type="submit" className={`flex items-center justify-center gap-5 ${isLoading && 'cursor-not-allowed'}`}>
                 <p>Ingresar</p>
+                {isLoading && (
+                  <Spinner /> 
+                )}
               </Button>                  
             </form>
           </div>

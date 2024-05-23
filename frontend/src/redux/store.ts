@@ -1,20 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authSlice } from "./slices/Auth.slice";
-import { GeneralError } from "../api/type";
+import authReducer from "./slices/authSlice";
+// import clientsReducer from "./slices/clientSlice";
+// import filtersReducer from "./slices/filtersSlice";
 
-export const store = configureStore({
-  reducer: {
-    authReducer: authSlice.reducer,
-  }
+const store = configureStore({
+	reducer: {
+		auth: authReducer,
+		// clients: clientsReducer,
+		// filters: filtersReducer
+	}
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-
-export const defaultError = () => {
-  const defaultGeneralError: GeneralError = {
-    message: "Nos encontramos con un problema, intenta más tarde",
-    status: 404,
-  };
-  return defaultGeneralError;
-};
+export default store;
