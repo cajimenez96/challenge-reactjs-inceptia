@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {ReactNode, useState} from 'react';
 import { FaRegUser } from "react-icons/fa";
 import { FaAlignLeft } from "react-icons/fa";
 import { FaAngleDoubleLeft } from "react-icons/fa";
@@ -7,12 +7,12 @@ import Spinner from '../Spinner';
 
 interface SidebarProps {
   children: ReactNode;
+  loading: boolean;
   elements: Client[];
   setElement: React.Dispatch<React.SetStateAction<number>>;
 }
 
-
-const Sidebar = ({children, elements, setElement}: SidebarProps) => {
+const Sidebar = ({children, loading, elements, setElement}: SidebarProps) => {
   const [openNav, setOpenNav] = useState<boolean>(false);
 
   const Button = ({children}) => {
@@ -40,7 +40,7 @@ const Sidebar = ({children, elements, setElement}: SidebarProps) => {
               </Button>
             </div>
               <ul className="space-y-2 font-medium">
-                {!elements ? <Spinner/> 
+                {loading ? <Spinner/> 
                 : elements.map((element, index) => (
                   <li key={index}>
                     <button

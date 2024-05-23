@@ -1,8 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../../components/Sidebar';
 import Table from '../../components/Table';
-import { Client } from '../../api/type';
-import { Case, GetClientsResponse } from '../../api/Reports';
 import Filter from '../../components/Filter';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { getClientReport, clientsSelector, isLoadingSelector, getClientDetailReport, clientDetailSelector } from '../../redux/slices/clientSlice';
@@ -39,7 +37,7 @@ const Report = () => {
   }, [clientId, filterDate]);
 
   return (
-    <Sidebar elements={clients} setElement={setClientId}>
+    <Sidebar elements={clients} setElement={setClientId} loading={isLoading}>
       <section>
         <article className="mb-10 mt-5">
           <h3 className="uppercase">Reportes</h3>

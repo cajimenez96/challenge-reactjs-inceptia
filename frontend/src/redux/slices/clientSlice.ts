@@ -28,8 +28,6 @@ undefined
 >('Client/getAll', async () => {
   try {
     const response = await GetClientsRequest();
-    console.log('getClientReport', response);
-    
     return response;
   } catch (error) {
     return error;
@@ -43,8 +41,6 @@ IGetDetailRequest
   const {id, from, to} = request;
   try {
     const response = await GetClientDetailRequest(id, from, to);
-    console.log('getClientDetailReport: ', response);
-    
     return response;
   } catch (error) {
     return error;
