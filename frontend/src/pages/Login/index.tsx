@@ -3,24 +3,39 @@ import { PASS, USER } from '../../utils/constats';
 import { useNavigate } from "react-router-dom";
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import Spinner from '../../components/Spinner';
+import { ILogin } from '../../api/type';
+
 //Redux
 import { LoginUser, isAuthSelector, isLoadingSelector } from '../../redux/slices/authSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import Spinner from '../../components/Spinner';
+
+const INITIAL_STATE = {
+  email: USER,
+  password: PASS
+};
+
 
 const Login = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const isAuth = useAppSelector(isAuthSelector);
   const isLoading = useAppSelector(isLoadingSelector);
-  const navigate = useNavigate();
 
-  const [email, setEmail] = useState<string>(USER);
-  const [password, setPassword] = useState<string>(PASS);
+  const [form, setForm] = useState<ILogin>(INITIAL_STATE);
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(LoginUser({email, password}))
+    dispatch(LoginUser(form))
 
   };
 
@@ -42,9 +57,9 @@ const Login = () => {
                   id="email"
                   label="Correo electrónico"
                   type="email"
-                  placeholder="nombre@empresa.com" 
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  placeholder="nombre@empresa.com"
+                  onChange={handleFormChange}
                 />
               </div>
               <div>
@@ -52,16 +67,14 @@ const Login = () => {
                   id="password"
                   type="password"
                   label="Password"
+                  name="password"
                   placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handleFormChange}
                 />
               </div>
-              <Button type="submit" className={`flex items-center justify-center gap-5 ${isLoading && 'cursor-not-allowed'}`}>
+              <Button type="submit" className={`flex justify-center items-center gap-4 ${isLoading && 'cursor-wait'}`}>
                 <p>Ingresar</p>
-                {isLoading && (
-                  <Spinner /> 
-                )}
+                {isLoading && (<Spinner />)}
               </Button>                  
             </form>
           </div>

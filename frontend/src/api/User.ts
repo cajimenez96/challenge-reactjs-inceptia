@@ -1,7 +1,7 @@
 import Axios from "../lib/axios";
-import { Login, User } from "./type";
+import { ILogin, User } from "./type";
 
-type LoginPayload = Login;
+type LoginPayload = ILogin;
 
 type LoginResponse = User;
 
