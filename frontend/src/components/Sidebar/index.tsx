@@ -4,16 +4,22 @@ import { FaAlignLeft } from "react-icons/fa";
 import { FaAngleDoubleLeft } from "react-icons/fa";
 import { Client } from '../../api/type';
 import Spinner from '../Spinner';
+import { useAppDispatch } from '../../redux/hooks';
+import { setClientId } from '../../redux/slices/clientSlice';
 
 interface SidebarProps {
   children: ReactNode;
   loading: boolean;
   elements: Client[];
-  setElement: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Sidebar = ({children, loading, elements, setElement}: SidebarProps) => {
+const Sidebar = ({children, loading, elements}: SidebarProps) => {
   const [openNav, setOpenNav] = useState<boolean>(false);
+  const dispatch = useAppDispatch()
+
+  const setClient = (id: number) => {
+    dispatch(setClientId(id));
+  }
 
   const Button = ({children}) => {
     return (
@@ -45,7 +51,7 @@ const Sidebar = ({children, loading, elements, setElement}: SidebarProps) => {
                   <li key={index}>
                     <button
                       className="w-full flex items-center p-2 rounded-lg border-transparent transition hover:bg-hover hover:text-font-white"
-                      onClick={() => setElement(element.id)}>
+                      onClick={() => setClient(element.id)}>
                       <FaRegUser />
                       <span className="ms-3">{element.name}</span>
                     </button>

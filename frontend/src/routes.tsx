@@ -5,7 +5,7 @@ import { useAppSelector } from './redux/hooks';
 import { isAuthSelector } from './redux/slices/authSlice';
 
 const PrivateRoutes = () => {
-  const isAuth = useAppSelector(isAuthSelector)
+  const isAuth = useAppSelector(isAuthSelector);
 
   if(!isAuth) return <Navigate to='/' replace />
 

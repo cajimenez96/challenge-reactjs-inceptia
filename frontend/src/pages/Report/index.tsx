@@ -3,7 +3,7 @@ import Sidebar from '../../components/Sidebar';
 import Table from '../../components/Table';
 import Filter from '../../components/Filter';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { getClientReport, clientsSelector, isLoadingSelector, getClientDetailReport, clientDetailSelector } from '../../redux/slices/clientSlice';
+import { getClientReport, clientsSelector, isLoadingSelector, getClientDetailReport, clientDetailSelector, clientIdSelector } from '../../redux/slices/clientSlice';
 
 interface Time {
   startDate: string;
@@ -20,8 +20,8 @@ const Report = () => {
   const isLoading = useAppSelector(isLoadingSelector);
   const clients = useAppSelector(clientsSelector);
   const details = useAppSelector(clientDetailSelector);
+  const idClient = useAppSelector(clientIdSelector);
 
-  const [clientId, setClientId] = useState<number>(0);
   const [filterDate, setFilterDate] = useState<Time>(INITIAL_STATE);
   
   useEffect(() => {
@@ -33,11 +33,11 @@ const Report = () => {
       await dispatch(getClientDetailReport({id, from: filter.startDate, to: filter.endDate}));
     }
 
-    if (clientId) getDetails(clientId, filterDate);
-  }, [clientId, filterDate]);
+    if (idClient) getDetails(idClient, filterDate);
+  }, [idClient, filterDate]);
 
   return (
-    <Sidebar elements={clients} setElement={setClientId} loading={isLoading}>
+    <Sidebar elements={clients} loading={isLoading}>
       <section>
         <article className="mb-10 mt-5">
           <h3 className="uppercase">Reportes</h3>
