@@ -7,15 +7,18 @@ interface AuthProviderProps {
 
 const INITIAL_STATE = {
   authenticated: false,
-  setAuthenticated: () => {}
+  setAuthenticated: () => {},
+  isLoading: false,
+  setIsLoading: () => {}
 }
 
 export const AuthContext = createContext<IAuthContext>(INITIAL_STATE);
 
 const AuthProvider = ({children}: AuthProviderProps) => {
   const [authenticated, setAuthenticated] = useState<boolean>(INITIAL_STATE.authenticated);
+  const [isLoading, setIsLoading] = useState<boolean>(INITIAL_STATE.isLoading);
 
-  const contextValue = useMemo(() => ({ authenticated, setAuthenticated }), [authenticated, setAuthenticated]);
+  const contextValue = useMemo(() => ({ authenticated, setAuthenticated, isLoading, setIsLoading }), [authenticated, setAuthenticated, isLoading, setIsLoading]);
 
   return (
     <AuthContext.Provider value={contextValue}>

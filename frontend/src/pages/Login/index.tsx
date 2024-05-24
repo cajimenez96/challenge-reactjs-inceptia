@@ -5,21 +5,34 @@ import { useNavigate } from "react-router-dom";
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import {AuthContext} from '../../context/AuthContext';
+import Spinner from '../../components/Spinner';
+import { ILogin } from '../../api/type';
+
 
 const Login = () => {
-  const {setAuthenticated} = useContext(AuthContext);
-  const navigate = useNavigate();
+  const INITIAL_STATE = {
+    email: USER,
+    password: PASS
+  };
 
-  const [email, setEmail] = useState<string>(USER);
-  const [password, setPassword] = useState<string>(PASS);
+  const {setAuthenticated, isLoading, setIsLoading} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [form, setForm] = useState<ILogin>(INITIAL_STATE);
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value,
+    }));
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setIsLoading(!isLoading);
     e.preventDefault();
-
-    const login = await LoginUser({email, password}, setAuthenticated);
-
+    
+    const login = await LoginUser(form, setAuthenticated, setIsLoading);
     if (login) navigate('/reports')
-
   };
 
   return (
@@ -36,9 +49,9 @@ const Login = () => {
                   id="email"
                   label="Correo electrónico"
                   type="email"
-                  placeholder="nombre@empresa.com" 
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  placeholder="nombre@empresa.com"
+                  onChange={handleFormChange}
                 />
               </div>
               <div>
@@ -46,13 +59,14 @@ const Login = () => {
                   id="password"
                   type="password"
                   label="Password"
+                  name="password"
                   placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={handleFormChange}
                 />
               </div>
-              <Button type="submit">
+              <Button type="submit" className={`flex justify-center items-center gap-4 ${isLoading && 'cursor-wait'}`}>
                 <p>Ingresar</p>
+                {isLoading && (<Spinner />)}
               </Button>                  
             </form>
           </div>

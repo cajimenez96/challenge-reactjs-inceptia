@@ -1,15 +1,16 @@
 import { LoginRequest} from "../../api/User";
-import { Login, User } from "../../api/type";
+import { ILogin, User } from "../../api/type";
 
 export const LoginUser = async (
-  form: Login,
-  setState: (value: boolean) => void)
-: Promise<User> => {
+  form: ILogin,
+  setAuth: (value: boolean) => void,
+  setLoading: (value: boolean) => void,
+) : Promise<User> => {
   return await LoginRequest(form)
   .then((res) => {
     if (res.login_status === 'SUCCESS') {
-      setState(true);
       localStorage.setItem('token', res.token);
+      setAuth(true);
       return res;
     }
   })
@@ -17,4 +18,5 @@ export const LoginUser = async (
     console.log('Failed: ', err);
     return err;
   })
+  .finally(() => setLoading(false));
 };

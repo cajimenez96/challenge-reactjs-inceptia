@@ -6,6 +6,7 @@ export interface User {
   profile_image: string | null;
   groups: Group[];
   is_active: boolean;
+  login_status: string;
   token: string;
 }
 
@@ -14,7 +15,7 @@ export interface Group {
   name: string;
 }
 
-export interface Login {
+export interface ILogin {
   email: string;
   password: string;
 }
